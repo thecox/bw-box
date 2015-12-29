@@ -8,6 +8,7 @@
   </head>
   <body>
     <ul>
+      <li><a href="#" class="default-link" data-popup="#default-popup">Default Popup</a></li>
       <li><a href="#" class="data-link" data-popup="#data-popup-1">Data Popup 1</a></li>
       <li><a href="#" class="data-link" data-popup="#data-popup-2">Data Popup 2</a></li>
       <li><a href="#" class="element-link">Element Popup</a></li>
@@ -15,6 +16,19 @@
       <li><a href="#" class="html-link">HMTL Popup</a></li>
     </ul>
     <!-- Standard B&W Box Structure -->
+    <div id="default-popup" class="bwbox__modal">
+      <div class="bwbox__modal__outer">
+        <div class="bwbox__modal__middle">
+          <div class="bwbox__modal__inner">
+            <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
+            <div class="bwbox__modal__inner__content">
+              <p>This is the default popup, which link uses data attributes - iterates through all links and uses data attributes to display</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End structure -->
     <div id="data-popup-1" class="bwbox__modal">
       <div class="bwbox__modal__outer">
         <div class="bwbox__modal__middle">
@@ -27,8 +41,6 @@
         </div>
       </div>
     </div>
-    <!-- End structure -->
-    <!-- Standard B&W Box Structure -->
     <div id="data-popup-2" class="bwbox__modal">
       <div class="bwbox__modal__outer">
         <div class="bwbox__modal__middle">
@@ -41,8 +53,6 @@
         </div>
       </div>
     </div>
-    <!-- End structure -->
-    <!-- Standard B&W Box Structure -->
     <div id="element-popup" class="bwbox__modal">
       <div class="bwbox__modal__outer">
         <div class="bwbox__modal__middle">
@@ -55,10 +65,11 @@
         </div>
       </div>
     </div>
-    <!-- End structure -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/jquery.bw-box.min.js" type="text/javascript"></script>
     <script>
+      // Default setup
+      $('.default-link').bwBox();
       // Initialize B&W Box with data attributes
       $('.data-link').bwBox({
         selectorType: 'data',

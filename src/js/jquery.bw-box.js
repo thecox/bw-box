@@ -67,7 +67,7 @@
           }
           break;
         case 'html':
-          if (!settings.htmlContent){ throw Error('Please provide content to populate the html element') }
+          if (!settings.htmlContent){ throw Error('Please provide content to populate the html element'); }
           else { $popupElement = generatePopup(settings.htmlContent); }
           break;
         default:
@@ -76,7 +76,7 @@
 
       // +++++ NEED TO ADD VARIABLE COMMENTS +++++
       var activatePopup = function($popup) {
-        var $middlepop = $popup.find('.bxbox__modal__middle');
+        var $middlepop = $popup.find('.bwbox__modal__middle');
         currentScrollTop = $('body').scrollTop();
         $('body').css('top', -currentScrollTop);
         // +++++ ADD ANIMATION OPTIONS TO AFFECT THIS +++++
