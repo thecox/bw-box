@@ -39,7 +39,7 @@
         width: 90%;
         max-width: 885px;
         z-index: 9999;
-        padding: 50px 2% 30px;
+        padding: 2em 2% 1em;
         margin: 30px auto;
 
         &__content {
@@ -51,10 +51,11 @@
 
         &__close {
           position: absolute;
-          color: #C7262C;
+          color: #555;
           top: 10px;
           right: 20px;
-          font-size: 20px;
+          font-size: .9em;
+          text-decoration: none;
         }
       }
     }
