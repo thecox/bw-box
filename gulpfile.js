@@ -31,7 +31,9 @@
   */
   gulp.task('server', function() {
     return gulp.src(dist + '/')
-      .pipe(webserver());
+      .pipe(webserver({
+        livereload: true
+      }));
   });
 
   /**
@@ -44,7 +46,7 @@
     return gulp.src(paths.scss)
       .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
       .pipe(postcss(processors))
-      .pipe(concat('bw-box.min.css'))
+      .pipe(concat('jquery.bw-box.min.css'))
       .pipe(gulp.dest(dist + '/css'));
   });
 
@@ -63,7 +65,7 @@
   */
   gulp.task('compress-js', function() {
     return gulp.src(paths.js)
-      .pipe(concat('bw-box.min.js'))
+      .pipe(concat('jquery.bw-box.min.js'))
       .pipe(uglify())
       .pipe(gulp.dest(dist + '/js'));
   });
@@ -82,7 +84,7 @@
   gulp.task('default', ['lint-js', 'compress-js', 'compile-sass']);
   gulp.task('scripts', ['lint-js', 'compress-js']);
   gulp.task('styles', ['compile-sass']);
-  gulp.task('develop', ['lint-js', 'compress-js', 'server', 'watch']);
+  gulp.task('develop', ['lint-js', 'compress-js', 'compile-sass', 'server', 'watch']);
 
 
 })();
