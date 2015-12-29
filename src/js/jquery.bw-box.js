@@ -21,20 +21,22 @@
 
     // Plugin options / default settings
     var settings = $.extend({
-      selectorType: 'data', // data or element
-      elementSelectors: null,
-      htmlContent: null,
-      complete: null
+      selectorType: 'data', // data, element, or html
+      elementSelectors: null, // array of objects matching number of element links
+      htmlContent: null, // html-formatted strings
+      complete: null // callback function
     }, options);
 
     // Return jQuery object for chaining
     return this.each(function(index) {
       // Global variable declarations
       // +++++ NEED TO ADD VARIABLE COMMENTS +++++
-      var $popupElement,
+      var $modalElement,
           currentScrollTop = 0;
 
-      var generatePopup = function(content) {
+      // Add structure on the fly via content
+      var generateModal = function(content) {
+        // Generate bwbox__modal jQuery object
         var $popup = $('<div/>', {'class': 'bwbox__modal', id: 'html-popup-'+index}).append(
           $('<div/>', {'class': 'bwbox__modal__outer'}).append(
             $('<div/>', {'class': 'bwbox__modal__middle'}).append(
@@ -46,7 +48,11 @@
             )
           )
         );
+
+        // Append to body
         $('body').append($popup);
+
+        // Return jQuery object for later manipulation
         return $popup;
       };
 
@@ -54,7 +60,7 @@
       // elementSelectors is an optional array used with the element selector type
       switch(settings.selectorType) {
         case 'data':
-          $popupElement = $($(this).data('popup'));
+          $modalElement = $($(this).data('popup'));
           break;
         case 'element':
           if (!settings.elementSelectors) { throw Error('Please provide an element selector array.'); }
@@ -62,27 +68,27 @@
             if (!settings.elementSelectors[index]) {
               throw Error('Please provide an element selector for popup ' + (index + 1) + '.');
             } else {
-              $popupElement = $(settings.elementSelectors[index]);
+              $modalElement = $(settings.elementSelectors[index]);
             }
           }
           break;
         case 'html':
           if (!settings.htmlContent){ throw Error('Please provide content to populate the html element'); }
-          else { $popupElement = generatePopup(settings.htmlContent); }
+          else { $modalElement = generateModal(settings.htmlContent); }
           break;
         default:
           throw Error('Please provide selectorType of data, element, or html');
       }
 
       // +++++ NEED TO ADD VARIABLE COMMENTS +++++
-      var activatePopup = function($popup) {
+      var activateModal = function($popup) {
         var $middlepop = $popup.find('.bwbox__modal__middle');
         currentScrollTop = $('body').scrollTop();
         $('body').css('top', -currentScrollTop);
         // +++++ ADD ANIMATION OPTIONS TO AFFECT THIS +++++
         $middlepop.css('top', '-3%');
 
-        // Fade in and animate popup into position
+        // Fade in and animate modal into position
         $popup.fadeIn({ queue: false, duration: 200 });
         $middlepop.animate({ top: '0%' }, 200);
 
@@ -91,35 +97,35 @@
         $('body').css({ 'position': 'fixed', 'overflow': 'hidden' });
       };
 
-      // Deactivate the popup
-      var deactivatePopup = function($popup) {
+      // Deactivate the modal
+      var deactivateModal = function($popup) {
         $popup.fadeOut();
         $('body').css({ 'position': 'static', 'overflow': 'auto' });
         $('body').scrollTop(currentScrollTop);
       };
 
-      // On link / element click, activate popup
+      // On link / element click, activate modal
       $(this).on('click', function(e) {
-        activatePopup($popupElement);
+        activateModal($modalElement);
         e.preventDefault();
       });
 
-      // On close button click, deactivate the popup
-      $popupElement.on('click', '.bwbox__modal__inner__close', function(e) {
-        deactivatePopup($popupElement);
+      // On close button click, deactivate the modal
+      $modalElement.on('click', '.bwbox__modal__inner__close', function(e) {
+        deactivateModal($modalElement);
         e.preventDefault();
       });
 
-      // On click anywhere but popup info or children, hide popup
+      // On click anywhere besides modal content, hide modal
       // +++++ DEFINE VARIABLES TO "GLOBAL" AS THEY WILL ONLY AFFECT THIS ELEMENT +++++
       $(document).on("mouseup touchend", function(event) {
-        if ($popupElement.is(':visible')) {
-          var container = $popupElement.find(".bwbox__modal__inner");
+        if ($modalElement.is(':visible')) {
+          var container = $modalElement.find(".bwbox__modal__inner");
           var parentContainer = container.parents(".bwbox__modal");
           if (container.css("display") === "block" || container.css("display") === "inline-block") {
             // If click event is on container, container child, or toggle button, do nothing - otherwise, toggle
             if (!container.is(event.target) && container.has(event.target).length === 0) {
-              deactivatePopup($popupElement);
+              deactivateModal($modalElement);
             }
           }
         }
