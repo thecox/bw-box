@@ -19,8 +19,8 @@
   /**
   * Paths
   */
-  var src = 'public/src';
-  var dist = 'public/dist';
+  var src = 'src';
+  var dist = 'dist';
   var paths = {
     js: src + '/js/*.js',
     scss: src + '/scss/**/*.scss'
