@@ -28,16 +28,16 @@ Then include the default modal structure:
 ```html
 <!-- Standard B&W Box Structure -->
 <div id="default-popup" class="bwbox__modal">
-<div class="bwbox__modal__outer">
-<div class="bwbox__modal__middle">
-<div class="bwbox__modal__inner">
-<a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
-<div class="bwbox__modal__inner__content">
-<p>This is the default popup, which link uses data attributes - iterates through all links and uses data attributes to display</p>
-</div>
-</div>
-</div>
-</div>
+  <div class="bwbox__modal__outer">
+    <div class="bwbox__modal__middle">
+      <div class="bwbox__modal__inner">
+        <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
+        <div class="bwbox__modal__inner__content">
+          <!-- Content Goes Here -->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- End structure -->
 ```
