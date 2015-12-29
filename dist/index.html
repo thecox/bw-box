@@ -2,18 +2,26 @@
   <head>
     <!-- Base popup styling -->
     <link href="css/jquery.bw-box.min.css" rel="stylesheet" type="text/css">
+    <style>
+
+    </style>
   </head>
   <body>
-    <a href="#" class="popup-link" data-popup="#test-popup">Testy</a>
-    <a href="#" class="popup-link" data-popup="#test-popup">Testy</a>
+    <ul>
+      <li><a href="#" class="data-link" data-popup="#data-popup-1">Data Popup 1</a></li>
+      <li><a href="#" class="data-link" data-popup="#data-popup-2">Data Popup 2</a></li>
+      <li><a href="#" class="element-link">Element Popup</a></li>
+      <li><a href="#" class="element-link">Element Popup</a></li>
+      <li><a href="#" class="html-link">HMTL Popup</a></li>
+    </ul>
     <!-- Standard B&W Box Structure -->
-    <div id="test-popup" class="bwbox__modal">
+    <div id="data-popup-1" class="bwbox__modal">
       <div class="bwbox__modal__outer">
         <div class="bwbox__modal__middle">
           <div class="bwbox__modal__inner">
             <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
             <div class="bwbox__modal__inner__content">
-              <p>Some test content goes here!</p>
+              <p>This is the data popup - iterates through all links and uses data attributes to display</p>
             </div>
           </div>
         </div>
@@ -21,13 +29,27 @@
     </div>
     <!-- End structure -->
     <!-- Standard B&W Box Structure -->
-    <div id="crazy-popup" class="bwbox__modal">
+    <div id="data-popup-2" class="bwbox__modal">
       <div class="bwbox__modal__outer">
         <div class="bwbox__modal__middle">
           <div class="bwbox__modal__inner">
             <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
             <div class="bwbox__modal__inner__content">
-              <p>Some crazy content goes here!</p>
+              <p>Duplicate: This is the data popup - iterates through all links and uses data attributes to display</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End structure -->
+    <!-- Standard B&W Box Structure -->
+    <div id="element-popup" class="bwbox__modal">
+      <div class="bwbox__modal__outer">
+        <div class="bwbox__modal__middle">
+          <div class="bwbox__modal__inner">
+            <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
+            <div class="bwbox__modal__inner__content">
+              <p>This is the element popup - requires an array of popup elements (if there are multiple links, there needs to be multiple values in the array. They can be the same)</p>
             </div>
           </div>
         </div>
@@ -37,12 +59,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/jquery.bw-box.min.js" type="text/javascript"></script>
     <script>
-      // Initialize B&W Box on selected elements
-      $(".popup-link").bwBox({
-        selectorType: 'element',
-        elementSelectors: ['#test-popup', '#crazy-popup'],
+      // Initialize B&W Box with data attributes
+      $('.data-link').bwBox({
+        selectorType: 'data',
         complete: function() {
-          console.log("Completed");
+          console.log("Data pop initialized");
+        }
+      });
+      // Initialize B&W Box with selected elements array
+      $('.element-link').bwBox({
+        selectorType: 'element',
+        elementSelectors: ['#element-popup', '#element-popup'],
+        complete: function() {
+          console.log("Element pop initialized");
+        }
+      });
+      // Initialize B&W Box with HTML content
+      $('.html-link').bwBox({
+        selectorType: 'html',
+        htmlContent: '<div>This is an html test. <a href="#">Link</a></div>',
+        complete: function() {
+          console.log("HTML pop initialized");
         }
       });
     </script>

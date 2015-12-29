@@ -23,6 +23,7 @@
     var settings = $.extend({
       selectorType: 'data', // data or element
       elementSelectors: null,
+      htmlContent: null,
       complete: null
     }, options);
 
@@ -32,6 +33,46 @@
       // +++++ NEED TO ADD VARIABLE COMMENTS +++++
       var $popupElement,
           currentScrollTop = 0;
+
+      var generatePopup = function(content) {
+        var $popup = $('<div/>', {'class': 'bwbox__modal', id: 'html-popup-'+index}).append(
+          $('<div/>', {'class': 'bwbox__modal__outer'}).append(
+            $('<div/>', {'class': 'bwbox__modal__middle'}).append(
+              $('<div/>', {'class': 'bwbox__modal__inner'}).append(
+                $('<a/>', {'href': '#', 'class': 'bwbox__modal__inner__close', text: 'CLOSE X'})
+              ).append(
+                $('<div/>', {'class': 'bwbox__modal__inner__content', html: content })
+              )
+            )
+          )
+        );
+        $('body').append($popup);
+        return $popup;
+      };
+
+      // Identify the selector method and popup object
+      // elementSelectors is an optional array used with the element selector type
+      switch(settings.selectorType) {
+        case 'data':
+          $popupElement = $($(this).data('popup'));
+          break;
+        case 'element':
+          if (!settings.elementSelectors) { throw Error('Please provide an element selector array.'); }
+          else {
+            if (!settings.elementSelectors[index]) {
+              throw Error('Please provide an element selector for popup ' + (index + 1) + '.');
+            } else {
+              $popupElement = $(settings.elementSelectors[index]);
+            }
+          }
+          break;
+        case 'html':
+          if (!settings.htmlContent){ throw Error('Please provide content to populate the html element') }
+          else { $popupElement = generatePopup(settings.htmlContent); }
+          break;
+        default:
+          throw Error('Please provide selectorType of data, element, or html');
+      }
 
       // +++++ NEED TO ADD VARIABLE COMMENTS +++++
       var activatePopup = function($popup) {
@@ -56,20 +97,6 @@
         $('body').css({ 'position': 'static', 'overflow': 'auto' });
         $('body').scrollTop(currentScrollTop);
       };
-
-      // Identify the selector method and popup object
-      // elementSelectors is an optional array used with the element selector type
-      if (settings.selectorType === 'data') {
-        $popupElement = $($(this).data('popup'));
-      } else if (settings.selectorType === 'element') {
-        if (!settings.elementSelectors) {
-          throw Error('Please provide an element selector');
-        } else {
-          $popupElement = $(settings.elementSelectors[index]);
-        }
-      } else {
-        throw Error('Please provide selectorType of either data or element');
-      }
 
       // On link / element click, activate popup
       $(this).on('click', function(e) {
