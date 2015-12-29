@@ -19,13 +19,13 @@ Place them in your directory and link to them from your implementation page - in
 
 To instantiate a B&W Box, add a target link like so:
 
-'''html
+```html
 <a href="#" class="default-link" data-popup="#default-popup">Default Modal</a>
-'''
+```
 
 Then include the default modal structure:
 
-'''html
+```html
 <!-- Standard B&W Box Structure -->
 <div id="default-popup" class="bwbox__modal">
 <div class="bwbox__modal__outer">
@@ -40,11 +40,11 @@ Then include the default modal structure:
 </div>
 </div>
 <!-- End structure -->
-'''
+```
 
 Then initialize the B&W Box by adding the following below the script:
 
-'''javascript
+```javascript
 // Default setup
 $('.default-link').bwBox();
-'''
+```
