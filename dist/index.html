@@ -1,45 +1,51 @@
-<!-- Base popup styling -->
-<link href="css/jquery.bw-box.min.css" rel="stylesheet" type="text/css">
-<a href="#" class="popup-link" data-popup="#test-popup">Testy</a>
-<a href="#" class="popup-link" data-popup="#test-popup">Testy</a>
-<!-- Standard B&W Box Structure -->
-<div id="test-popup" class="bwbox__modal">
-  <div class="bwbox__modal__outer">
-    <div class="bwbox__modal__middle">
-      <div class="bwbox__modal__inner">
-        <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
-        <div class="bwbox__modal__inner__content">
-          <p>Some test content goes here!</p>
+<html>
+  <head>
+    <!-- Base popup styling -->
+    <link href="css/jquery.bw-box.min.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <a href="#" class="popup-link" data-popup="#test-popup">Testy</a>
+    <a href="#" class="popup-link" data-popup="#test-popup">Testy</a>
+    <!-- Standard B&W Box Structure -->
+    <div id="test-popup" class="bwbox__modal">
+      <div class="bwbox__modal__outer">
+        <div class="bwbox__modal__middle">
+          <div class="bwbox__modal__inner">
+            <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
+            <div class="bwbox__modal__inner__content">
+              <p>Some test content goes here!</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<!-- End structure -->
-<!-- Standard B&W Box Structure -->
-<div id="crazy-popup" class="bwbox__modal">
-  <div class="bwbox__modal__outer">
-    <div class="bwbox__modal__middle">
-      <div class="bwbox__modal__inner">
-        <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
-        <div class="bwbox__modal__inner__content">
-          <p>Some crazy content goes here!</p>
+    <!-- End structure -->
+    <!-- Standard B&W Box Structure -->
+    <div id="crazy-popup" class="bwbox__modal">
+      <div class="bwbox__modal__outer">
+        <div class="bwbox__modal__middle">
+          <div class="bwbox__modal__inner">
+            <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
+            <div class="bwbox__modal__inner__content">
+              <p>Some crazy content goes here!</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<!-- End structure -->
-<!-- jQuery and B&W Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="js/jquery.bw-box.min.js" type="text/javascript"></script>
-<script>
-  // Initialize B&W Box on selected elements
-  $(".popup-link").bwBox({
-    selectorType: 'element',
-    elementSelectors: ['#test-popup', '#crazy-popup'],
-    complete: function() {
-      console.log("Completed");
-    }
-  });
-</script>
+    <!-- End structure -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/jquery.bw-box.min.js" type="text/javascript"></script>
+    <script>
+      // Initialize B&W Box on selected elements
+      $(".popup-link").bwBox({
+        selectorType: 'element',
+        elementSelectors: ['#test-popup', '#crazy-popup'],
+        complete: function() {
+          console.log("Completed");
+        }
+      });
+    </script>
+  </body>
+  <!-- jQuery and B&W Scripts -->
+</html>
