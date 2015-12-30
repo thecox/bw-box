@@ -37,7 +37,7 @@
       // Add structure on the fly via content
       var generateModal = function(content) {
         // Generate bwbox__modal jQuery object
-        var $popup = $('<div/>', {'class': 'bwbox__modal', id: 'html-popup-'+index}).append(
+        var $modal = $('<div/>', {'class': 'bwbox__modal', id: 'html-modal-'+index}).append(
           $('<div/>', {'class': 'bwbox__modal__outer'}).append(
             $('<div/>', {'class': 'bwbox__modal__middle'}).append(
               $('<div/>', {'class': 'bwbox__modal__inner'}).append(
@@ -50,23 +50,23 @@
         );
 
         // Append to body
-        $('body').append($popup);
+        $('body').append($modal);
 
         // Return jQuery object for later manipulation
-        return $popup;
+        return $modal;
       };
 
-      // Identify the selector method and popup object
+      // Identify the selector method and modal object
       // elementSelectors is an optional array used with the element selector type
       switch(settings.selectorType) {
         case 'data':
-          $modalElement = $($(this).data('popup'));
+          $modalElement = $($(this).data('modal'));
           break;
         case 'element':
           if (!settings.elementSelectors) { throw Error('Please provide an element selector array.'); }
           else {
             if (!settings.elementSelectors[index]) {
-              throw Error('Please provide an element selector for popup ' + (index + 1) + '.');
+              throw Error('Please provide an element selector for modal ' + (index + 1) + '.');
             } else {
               $modalElement = $(settings.elementSelectors[index]);
             }
@@ -81,15 +81,15 @@
       }
 
       // +++++ NEED TO ADD VARIABLE COMMENTS +++++
-      var activateModal = function($popup) {
-        var $middlepop = $popup.find('.bwbox__modal__middle');
+      var activateModal = function($modal) {
+        var $middlepop = $modal.find('.bwbox__modal__middle');
         currentScrollTop = $('body').scrollTop();
         $('body').css('top', -currentScrollTop);
         // +++++ ADD ANIMATION OPTIONS TO AFFECT THIS +++++
         $middlepop.css('top', '-3%');
 
         // Fade in and animate modal into position
-        $popup.fadeIn({ queue: false, duration: 200 });
+        $modal.fadeIn({ queue: false, duration: 200 });
         $middlepop.animate({ top: '0%' }, 200);
 
         // Disable scrolling on body & position fixed to resolve mobile issues
@@ -98,8 +98,8 @@
       };
 
       // Deactivate the modal
-      var deactivateModal = function($popup) {
-        $popup.fadeOut();
+      var deactivateModal = function($modal) {
+        $modal.fadeOut();
         $('body').css({ 'position': 'static', 'overflow': 'auto' });
         $('body').scrollTop(currentScrollTop);
       };

@@ -1,6 +1,6 @@
 <html>
   <head>
-    <!-- Base popup styling -->
+    <!-- Base modal styling -->
     <link href="css/jquery.bw-box.min.css" rel="stylesheet" type="text/css">
     <style>
 
@@ -8,58 +8,58 @@
   </head>
   <body>
     <ul>
-      <li><a href="#" class="default-link" data-popup="#default-popup">Default Modal</a></li>
-      <li><a href="#" class="data-link" data-popup="#data-popup-1">Data Modal 1</a></li>
-      <li><a href="#" class="data-link" data-popup="#data-popup-2">Data Modal 2</a></li>
+      <li><a href="#" class="default-link" data-modal="#default-modal">Default Modal</a></li>
+      <li><a href="#" class="data-link" data-modal="#data-modal-1">Data Modal 1</a></li>
+      <li><a href="#" class="data-link" data-modal="#data-modal-2">Data Modal 2</a></li>
       <li><a href="#" class="element-link">Element Modal</a></li>
       <li><a href="#" class="element-link">Element Modal</a></li>
       <li><a href="#" class="html-link">HMTL Modal</a></li>
     </ul>
     <!-- Standard B&W Box Structure -->
-    <div id="default-popup" class="bwbox__modal">
+    <div id="default-modal" class="bwbox__modal">
       <div class="bwbox__modal__outer">
         <div class="bwbox__modal__middle">
           <div class="bwbox__modal__inner">
             <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
             <div class="bwbox__modal__inner__content">
-              <p>This is the default popup, which link uses data attributes - iterates through all links and uses data attributes to display</p>
+              <p>This is the default modal, which link uses data attributes - iterates through all links and uses data attributes to display</p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- End structure -->
-    <div id="data-popup-1" class="bwbox__modal">
+    <div id="data-modal-1" class="bwbox__modal">
       <div class="bwbox__modal__outer">
         <div class="bwbox__modal__middle">
           <div class="bwbox__modal__inner">
             <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
             <div class="bwbox__modal__inner__content">
-              <p>This is the data popup - iterates through all links and uses data attributes to display</p>
+              <p>This is the data modal - iterates through all links and uses data attributes to display</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div id="data-popup-2" class="bwbox__modal">
+    <div id="data-modal-2" class="bwbox__modal">
       <div class="bwbox__modal__outer">
         <div class="bwbox__modal__middle">
           <div class="bwbox__modal__inner">
             <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
             <div class="bwbox__modal__inner__content">
-              <p>Duplicate: This is the data popup - iterates through all links and uses data attributes to display</p>
+              <p>Duplicate: This is the data modal - iterates through all links and uses data attributes to display</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div id="element-popup" class="bwbox__modal">
+    <div id="element-modal" class="bwbox__modal">
       <div class="bwbox__modal__outer">
         <div class="bwbox__modal__middle">
           <div class="bwbox__modal__inner">
             <a href="#" class="bwbox__modal__inner__close">CLOSE X</a>
             <div class="bwbox__modal__inner__content">
-              <p>This is the element popup - requires an array of popup elements (if there are multiple links, there needs to be multiple values in the array. They can be the same)</p>
+              <p>This is the element modal - requires an array of modal elements (if there are multiple links, there needs to be multiple values in the array. They can be the same)</p>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@
       // Initialize B&W Box with selected elements array
       $('.element-link').bwBox({
         selectorType: 'element',
-        elementSelectors: ['#element-popup', '#element-popup'],
+        elementSelectors: ['#element-modal', '#element-modal'],
         complete: function() {
           console.log("Element pop initialized");
         }
