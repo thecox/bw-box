@@ -11,6 +11,7 @@
   var postcss = require('gulp-postcss');
   var autoprefixer = require('autoprefixer');
   var jshint = require('gulp-jshint');
+  var notify = require('gulp-notify');
   var stylish = require('jshint-stylish');
   var webserver = require('gulp-webserver');
   var livereload = require('gulp-livereload');
@@ -58,6 +59,7 @@
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
       .pipe(jshint.reporter('fail'))
+      .on('error', notify.onError({ message: 'JS hint fail' }));
   });
 
   /**
@@ -66,14 +68,16 @@
   gulp.task('compress-js', function() {
     return gulp.src(paths.js)
       .pipe(concat('jquery.bw-box.min.js'))
-      .pipe(uglify())
+      .pipe(uglify().on('error', function(error) {
+        console.log(error);
+      }))
       .pipe(gulp.dest(dist + '/js'));
   });
 
   // Watch files and reload browser, as needed
   gulp.task('watch', function() {
     livereload.listen();
-    gulp.watch(paths.js, ['compress-js']);
+    gulp.watch(paths.js, ['lint-js', 'compress-js']);
     gulp.watch(paths.scss, ['compile-sass']);
     gulp.watch(dist + '/**').on('change', livereload.changed);
   });
