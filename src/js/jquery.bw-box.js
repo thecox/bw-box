@@ -31,8 +31,8 @@
     return this.each(function(index) {
       // Global variable declarations
       // +++++ NEED TO ADD VARIABLE COMMENTS +++++
-      var $modalElement,
-          currentScrollTop = 0;
+      var $modalElement;
+      window.bwboxCurrentScrollTop = 0;
 
       // Add structure on the fly via content
       var generateModal = function(content) {
@@ -83,8 +83,8 @@
       // +++++ NEED TO ADD VARIABLE COMMENTS +++++
       var activateModal = function($modal) {
         var $middlepop = $modal.find('.bwbox__modal__middle');
-        currentScrollTop = $('body').scrollTop();
-        $('body').css('top', -currentScrollTop);
+        window.bwboxCurrentScrollTop = $('body').scrollTop();
+        $('body').css('top', -window.bwboxCurrentScrollTop);
         // +++++ ADD ANIMATION OPTIONS TO AFFECT THIS +++++
         $middlepop.css('top', '-3%');
 
@@ -101,7 +101,7 @@
       var deactivateModal = function($modal) {
         $modal.fadeOut();
         $('body').css({ 'position': 'static', 'overflow': 'auto' });
-        $('body').scrollTop(currentScrollTop);
+        $('body').scrollTop(window.bwboxCurrentScrollTop);
       };
 
       // On link / element click, activate modal

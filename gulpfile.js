@@ -25,8 +25,8 @@
   var paths = {
     js: src + '/js/*.js',
     scss: src + '/scss/**/*.scss'
-  }
-
+  };
+  
   /**
   * Start a webserver @ localhost:8000
   */
