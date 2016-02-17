@@ -1,6 +1,6 @@
 # B&W Box
 
-Black & White Box is a simple and effective modal / popup jQuery plugin, with (tested) cross-browser support back to IE9. Dynamically centered mdoals / mobile-friendly design / jQuery chaining. Supports data-attributes, direct element selection, or html entry.
+Black & White Box is a simple and effective modal / popup jQuery plugin, with (tested) cross-browser support back to IE9. Dynamically centered modals / mobile-friendly design / jQuery chaining. Supports data-attributes, direct element selection, or html entry.
 
 ## Live Demo
 
@@ -10,7 +10,7 @@ Coming Soon
 
 Download the necessary files:
 
-* Javascript from `src/js/jquery.bw-box.js` or `dist/js/jquery.bw-box.js`
+* Javascript from `src/js/jquery.bw-box.js` or `dist/js/jquery.bw-box.min.js`
 * CSS from `dist/js/jquery.bw-box.js`
 
 Place them in your directory and link to them from your implementation page - include the CSS link in the `head`, and the Javascript file after the jQuery script and before the closing `body` tag.
@@ -48,8 +48,6 @@ Then initialize the B&W Box by adding the following in a script tag or separate 
 // Default setup
 $('.default-link').bwBox();
 ```
-
-If there are multiple
 
 **Note:** This plugin updates `body` styling to `position: fixed` to resolve mobile overlay issues - you may need to add the following styling to ensure proper behavior:
 
