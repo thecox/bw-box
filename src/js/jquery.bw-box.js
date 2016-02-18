@@ -29,12 +29,16 @@
 
     // Return jQuery object for chaining
     return this.each(function(index) {
-      // Global variable declarations
-      // +++++ NEED TO ADD VARIABLE COMMENTS +++++
       var $modalElement;
       window.bwboxCurrentScrollTop = 0;
 
-      // Add structure on the fly via content
+      /**
+       * generateModal
+       *
+       * @description Auto-generate structure to wrap submitted content
+       * @param {HTMLElement} content The HTMl content to insert into the wrapper
+       * @return {jQuery Element} Generated jQuery element
+       */
       var generateModal = function(content) {
         // Generate bwbox__modal jQuery object
         var $modal = $('<div/>', {'class': 'bwbox__modal', id: 'html-modal-'+index}).append(
