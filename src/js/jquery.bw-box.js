@@ -29,13 +29,24 @@
     plugin.settings = {};
     plugin.$modalElement = null;
 
-    // Constructor method
+    /**
+     * init
+     *
+     * @description Intializes the plugin. Returns nothing
+     */
     plugin.init = function() {
       plugin.settings = $.extend({}, plugin.DEFAULTS, options);
-      defineModal();
+
+      /** Error catching for modal definitions */
+      try {
+        defineModal();
+      } catch (error) {
+        console.error(error);
+        return;
+      }
       bindListeners();
 
-      // Callback function on setup complete
+      /** Callback function on setup complete */
       if ($.isFunction( plugin.settings.complete )) {
         plugin.settings.complete.call( this );
       }
@@ -44,43 +55,37 @@
     /**
      * defineModal
      *
-     * @description Determine $modalElement based on selectorType
+     * @description Determine $modalElement based on selectorType. Returns nothing - private
      */
     var defineModal = function() {
-      // Identify the selector method and modal object
-      // elementSelectors is an optional array used with the element selector type
       switch(plugin.settings.selectorType) {
         case 'data':
+          if (!$($element.data('modal')).length) { throw new Error('No matching modal was found on the page'); }
           plugin.$modalElement = $($element.data('modal'));
           break;
         case 'element':
-          if (!plugin.settings.elementSelectors) { throw Error('Please provide an element selector array.'); }
-          else {
-            if (!plugin.settings.elementSelectors[index]) {
-              throw Error('Please provide an element selector for modal ' + (index + 1) + '.');
-            } else {
-              plugin.$modalElement = $(plugin.settings.elementSelectors[index]);
-            }
-          }
+          if (!plugin.settings.elementSelectors) { throw new Error('Please provide an element selector array'); }
+          if (!plugin.settings.elementSelectors[index]) { throw new Error('Please provide an element selector for modal ' + (index + 1) + '.'); }
+          plugin.$modalElement = $(plugin.settings.elementSelectors[index]);
           break;
         case 'html':
-          if (!plugin.settings.htmlContent){ throw Error('Please provide content to populate the html element'); }
-          else { plugin.$modalElement = generateModal(plugin.settings.htmlContent); }
+          if (!plugin.settings.htmlContent){ throw new Error('Please provide content to populate the html element'); }
+          plugin.$modalElement = generateModal(plugin.settings.htmlContent);
           break;
         default:
-          throw Error('Please provide selectorType of data, element, or html');
+          throw new Error('Please provide selectorType of data, element, or html');
       }
     };
 
     /**
      * generateModal
      *
-     * @description Auto-generate structure to wrap submitted content
+     * @description Auto-generate structure to wrap submitted content - private
      * @param {HTMLElement} content The HTMl content to insert into the wrapper
      * @return {jQuery} Generated jQuery modal element
      */
     var generateModal = function(content) {
-      // Generate bwbox__modal jQuery object
+      /** Generate bwbox__modal jQuery object */
       var $modal = $('<div/>', {'class': 'bwbox__modal', id: 'html-modal-'+index}).append(
         $('<div/>', {'class': 'bwbox__modal__outer'}).append(
           $('<div/>', {'class': 'bwbox__modal__middle'}).append(
@@ -93,7 +98,7 @@
         )
       );
 
-      // Append to body
+      /** Append jQuery object to body */
       $('body').append($modal);
 
       // Return jQuery object for later manipulation
@@ -103,7 +108,7 @@
     /**
      * activateModal
      *
-     * @description Activate modal element and overlay page
+     * @description Activate modal element and overlay page. Returns nothing - public
      * @param {jQuery} $modal The modal element to activate
      */
     plugin.activateModal = function() {
@@ -111,14 +116,14 @@
       window.bwboxCurrentScrollTop = $('body').scrollTop();
       $('body').css('top', -window.bwboxCurrentScrollTop);
 
-      // +++++ ADD ANIMATION OPTIONS TO AFFECT THIS +++++
+      // +++++ ADD ANIMATION OPTIONS TO AFFECT DROPDOWN +++++
       $middlepop.css('top', '-3%');
 
-      // Fade in and animate modal into position
+      /** Fade in and animate modal into position */
       plugin.$modalElement.fadeIn({ queue: false, duration: 200 });
       $middlepop.animate({ top: '0%' }, 200);
 
-      // Disable scrolling on body & position fixed to resolve mobile issues
+      /** Disable scrolling on body & position fixed to resolve mobile issues */
       // +++++ ADD OPTION TO DISABLE FIXED POSITIONING AS IT COULD CAUSE ISSUES WITH CERTAIN LAYOUTS +++++
       $('body').css({ 'position': 'fixed', 'overflow': 'hidden' });
     };
@@ -126,7 +131,7 @@
     /**
      * deactivateModal
      *
-     * @description Deactivate current modal element
+     * @description Deactivate current modal element. Returns nothing - public
      * @param {jQuery} $modal The modal element to deactivate
      */
     plugin.deactivateModal = function() {
@@ -138,7 +143,7 @@
     /**
      * bindListeners
      *
-     * @description Add click listeners to modal elements
+     * @description Add click listeners to modal elements. Returns nothing - private
      */
     var bindListeners = function() {
       $element.on('click', function(e) {
@@ -151,14 +156,13 @@
         e.preventDefault();
       });
 
-      // On click anywhere besides modal content, hide modal
-      // +++++ DEFINE VARIABLES TO "GLOBAL" AS THEY WILL ONLY AFFECT THIS ELEMENT +++++
+      /** On click anywhere besides modal content, hide modal */
       $(document).on("mouseup touchend", function(event) {
         if (plugin.$modalElement.is(':visible')) {
           var container = plugin.$modalElement.find(".bwbox__modal__inner");
           var parentContainer = container.parents(".bwbox__modal");
           if (container.css("display") === "block" || container.css("display") === "inline-block") {
-            // If click event is on container, container child, or toggle button, do nothing - otherwise, toggle
+            /** If click event is on container, or container child do nothing - otherwise, deactivate modal */
             if (!container.is(event.target) && container.has(event.target).length === 0) {
               plugin.deactivateModal();
             }
@@ -171,11 +175,11 @@
   };
 
   $.fn.bwBox = function( options ) {
-    // Return jQuery object for chaining
+    /** Return jQuery object for chaining */
     return this.each(function(index) {
       window.bwboxCurrentScrollTop = 0;
 
-      // If plugin has not been attached to the element
+      /** If plugin is not yet attached to this element, attach */
       if (undefined === $(this).data('bwBox')) {
         var plugin = new $.bwBox(this, options, index);
         $(this).data('bwBox', plugin);
