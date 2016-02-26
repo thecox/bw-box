@@ -3,20 +3,31 @@
     <!-- Base modal styling -->
     <link href="css/jquery.bw-box.min.css" rel="stylesheet" type="text/css">
     <style>
+      body {
+        width: 100%;
+      }
       p {
         height: 120%;
+      }
+      .page-section {
+        width: 90%;
+        max-width: 1340px;
+        margin: 0 auto;
       }
     </style>
   </head>
   <body>
-    <ul>
-      <li><a href="#" class="default-link" data-modal="#default-modal">Default Modal</a></li>
-      <li><a href="#" class="data-link" data-modal="#data-modal-1">Data Modal 1</a></li>
-      <li><a href="#" class="data-link" data-modal="#data-modal-2">Data Modal 2</a></li>
-      <li><a href="#" class="element-link">Element Modal</a></li>
-      <li><a href="#" class="element-link">Element Modal</a></li>
-      <li><a href="#" class="html-link">HMTL Modal</a></li>
-    </ul>
+    <section class="page-section">
+      <ul>
+        <li><a href="#" class="default-link" data-modal="#default-modal">Default Modal</a></li>
+        <li><a href="#" class="data-link" data-modal="#data-modal-1">Data Modal 1</a></li>
+        <li><a href="#" class="data-link" data-modal="#data-modal-2">Data Modal 2</a></li>
+        <li><a href="#" class="element-link">Element Modal</a></li>
+        <li><a href="#" class="element-link">Element Modal</a></li>
+        <li><a href="#" class="html-link">HMTL Modal</a></li>
+      </ul>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque doloremque maxime sed! Eos aliquam accusamus velit, similique dolor tempore quidem quas quis, cupiditate perspiciatis saepe fuga mollitia animi ipsum in! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sequi fugiat quasi est aliquam nulla tenetur maiores iure, repellat culpa quibusdam inventore porro. Repudiandae odio provident vitae dignissimos at iusto!</p>
+    </section>
     <!-- Standard B&W Box Structure -->
     <div id="default-modal" class="bwbox__modal">
       <div class="bwbox__modal__outer">
@@ -67,7 +78,6 @@
         </div>
       </div>
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque doloremque maxime sed! Eos aliquam accusamus velit, similique dolor tempore quidem quas quis, cupiditate perspiciatis saepe fuga mollitia animi ipsum in! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sequi fugiat quasi est aliquam nulla tenetur maiores iure, repellat culpa quibusdam inventore porro. Repudiandae odio provident vitae dignissimos at iusto!</p>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/jquery.bw-box.min.js" type="text/javascript"></script>
     <script>

@@ -49,6 +49,8 @@ Then initialize the B&W Box by adding the following in a script tag or separate 
 $('.default-link').bwBox();
 ```
 
+
+
 **Note:** This plugin updates `body` styling to `position: fixed` to resolve mobile overlay issues - you may need to add the following styling to ensure proper behavior:
 
 ```css

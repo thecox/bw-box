@@ -65,7 +65,7 @@
           break;
         case 'element':
           if (!plugin.settings.elementSelectors) { throw new Error('Please provide an element selector array'); }
-          if (!plugin.settings.elementSelectors[index]) { throw new Error('Please provide an element selector for modal ' + (index + 1) + '.'); }
+          if (!plugin.settings.elementSelectors[index]) { throw new Error('Please provide an element selector for modal ' + (index + 1)); }
           plugin.$modalElement = $(plugin.settings.elementSelectors[index]);
           break;
         case 'html':
@@ -106,6 +106,19 @@
     };
 
     /**
+     * getScrollBarWidth
+     *
+     * @description Determine browser scrollbar width - private
+     * @return {Number} Width of scrollbar
+     */
+    var getScrollBarWidth = function() {
+      var $outer = $('<div>').css({visibility: 'hidden', width: 100, overflow: 'scroll'}).appendTo('body'),
+          widthWithScroll = $('<div>').css({width: '100%'}).appendTo($outer).outerWidth();
+      $outer.remove();
+      return 100 - widthWithScroll;
+    };
+
+    /**
      * activateModal
      *
      * @description Activate modal element and overlay page. Returns nothing - public
@@ -113,6 +126,7 @@
      */
     plugin.activateModal = function() {
       var $middlepop = plugin.$modalElement.find('.bwbox__modal__middle');
+      var scrollbarWidth = getScrollBarWidth() > 0 ? (getScrollBarWidth() - 1) : 0;
       window.bwboxCurrentScrollTop = $('body').scrollTop();
       $('body').css('top', -window.bwboxCurrentScrollTop);
 
@@ -125,7 +139,7 @@
 
       /** Disable scrolling on body & position fixed to resolve mobile issues */
       // +++++ ADD OPTION TO DISABLE FIXED POSITIONING AS IT COULD CAUSE ISSUES WITH CERTAIN LAYOUTS +++++
-      $('body').css({ 'position': 'fixed', 'overflow': 'hidden' });
+      $('body').css({ 'position': 'fixed', 'overflow': 'hidden', 'width': '100%' }).css('width', '-=' + scrollbarWidth);
     };
 
     /**
@@ -136,7 +150,7 @@
      */
     plugin.deactivateModal = function() {
       plugin.$modalElement.fadeOut();
-      $('body').css({ 'position': 'static', 'overflow': 'auto' });
+      $('body').css({ 'position': 'static', 'overflow': 'auto', 'width': '100%' });
       $('body').scrollTop(window.bwboxCurrentScrollTop);
     };
 
