@@ -49,7 +49,19 @@ Then initialize the B&W Box by adding the following in a script tag or separate 
 $('.default-link').bwBox();
 ```
 
+There are two other methods for initializing the modal, which are `element` and `html`. These can be passed with the `selectorType` option during initializiation.
 
+### Element
+
+The `element` selector allows the passing of the modal element directly to the function, without any data attributes. This method also requires an `elementSelectors` option, with element selectors for each matching element. Here's an example of the element selector:
+
+```javascript
+// Element selecotr
+$('.element-link').bwBox({
+  selectorType: 'element',
+  elementSelectors: ['#element-modal', '#element-modal2']
+});
+```
 
 **Note:** This plugin updates `body` styling to `position: fixed` to resolve mobile overlay issues - you may need to add the following styling to ensure proper behavior:
 
