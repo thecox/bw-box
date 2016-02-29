@@ -149,7 +149,10 @@
      * @param {jQuery} $modal The modal element to deactivate
      */
     plugin.deactivateModal = function() {
-      plugin.$modalElement.fadeOut();
+      plugin.$modalElement.fadeOut(400, function() {
+        plugin.$modalElement.find('.bwbox__modal__inner').css('right', 0);
+      });
+      plugin.$modalElement.find('.bwbox__modal__inner').css('right', -(getScrollBarWidth() - (getScrollBarWidth() / 2)));
       $('body').css({ 'position': 'static', 'overflow': 'auto', 'width': '100%' });
       $('body').scrollTop(window.bwboxCurrentScrollTop);
     };
