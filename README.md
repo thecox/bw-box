@@ -11,7 +11,7 @@ Coming Soon
 Download the necessary files:
 
 * Javascript from `src/js/jquery.bw-box.js` or `dist/js/jquery.bw-box.min.js`
-* CSS from `dist/js/jquery.bw-box.js`
+* CSS from `dist/js/jquery.bw-box.min.css`
 
 Place them in your directory and link to them from your implementation page - include the CSS link in the `head`, and the Javascript file after the jQuery script and before the closing `body` tag.
 
@@ -82,3 +82,21 @@ The B&W Box plugin accepts several options:
 * **elementSelectors:** null (array) array of strings corresponding to the number of elements encompassed by the selector.
 * **htmlContent:** null (string) HTML-formatted string to populate the modal dynamically without prior structure
 * **complete:** null (function) callback function after initialization of the modals
+
+## Public Methods
+
+This plugin exposes two public methods that can be called on the target element after instantiation. They are:
+
+* **activateModal:** Toggles open the selected modal element
+
+* **deactivateModal:** Toggles close the selected modal element
+
+Example usage:
+
+```javascript
+// Open modal
+$('.default-link').data('bwBox').activateModal();
+
+// Close modal
+$('.default-link').data('bwBox').deactivateModal();
+```
