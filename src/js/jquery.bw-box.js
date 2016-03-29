@@ -99,7 +99,7 @@
       );
 
       /** Append jQuery object to body */
-      $('body').append($modal);
+      $('body').addClass('bw-box-active').append($modal);
 
       // Return jQuery object for later manipulation
       return $modal;
@@ -128,7 +128,7 @@
       var $middlepop = plugin.$modalElement.find('.bwbox__modal__middle');
       var scrollbarWidth = getScrollBarWidth() > 0 ? (getScrollBarWidth() - 1) : 0;
       window.bwboxCurrentScrollTop = $('body').scrollTop();
-      $('body').css('top', -window.bwboxCurrentScrollTop);
+      $('body').addClass('bw-box-active').css('top', -window.bwboxCurrentScrollTop);
 
       // +++++ ADD ANIMATION OPTIONS TO AFFECT DROPDOWN +++++
       $middlepop.css('top', '-3%');
@@ -153,7 +153,7 @@
         plugin.$modalElement.find('.bwbox__modal__inner').css('right', 0);
       });
       plugin.$modalElement.find('.bwbox__modal__inner').css('right', -(getScrollBarWidth() - (getScrollBarWidth() / 2)));
-      $('body').css({ 'position': 'static', 'overflow': 'auto', 'width': '100%' });
+      $('body').removeClass('bw-box-active').css({ 'position': 'static', 'overflow': 'auto', 'width': '100%' });
       $('body').scrollTop(window.bwboxCurrentScrollTop);
     };
 
