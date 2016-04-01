@@ -99,7 +99,7 @@
       );
 
       /** Append jQuery object to body */
-      $('body').addClass('bw-box-active').append($modal);
+      $('body').append($modal);
 
       // Return jQuery object for later manipulation
       return $modal;
